@@ -1,43 +1,55 @@
-//get User Input - Controller
+//I - get User Input - Controller
 function getValue(){
-    //get user string from document
+
+    //3a - hide alert message
+    document.getElementById("alert").classList.add("invisible");
+
+    //1 - get user string from document
     let userString = document.getElementById("userString").value;
     
-    //check for Palindrome
+    //2 - check for Palindrome
     let returnObj = checkForPalindrome(userString);
 
-    //display message
+    //3b - display message
     displaymessage(returnObj);
 }
 
-//check for Palindrome - Model
+//II - check for Palindrome - Model
 function checkForPalindrome(userString){
-    //convert to lowercase
+    //2a - convert to lowercase
     userString = userString.toLowerCase();
     
-    //remove spaces & special characters
+    //2b - remove spaces & special characters
     let regex = /[^a-z0-9]/gi; //rejects everything except alphanumerical characters
     userString = userString.replace(regex, "");
 
-    //decrementing loop
-    let revString = []
+    //2c - decrementing loop
+    let revString = []; //array
+    let returnObj = {}; //object - dynamic --> not typesafe
 
     for (let index = userString.length - 1; index >= 0; index--) {
         revString += userString[index];
     }
 
     if (revString == userString) {
-        
+        returnObj.msg = "Congratulations, it's a Palindrome."
+    }
+    else{
+        returnObj.msg = "Please, enter a Palindrome."
     }
 
-    //display message
-    ;
+    //3 - display message
+    returnObj.reversed = revString;
+    return returnObj;
 }
 
-//display message - View
+//III - display message - View
 function getValue(){
-    //get user string from document
-    ;
+    //1 - get user string from document
+    document.getElementById("alertHeader").innerHTML = returnObj.msg;
+    document.getElementById("msg").innerHTML = `Your phrase reversed is: ${returnObj.reversed}`;
+    document.getElementById("alert").classList.remove("invisible");
+
     //check for Palindrome
     ;
     //display message
